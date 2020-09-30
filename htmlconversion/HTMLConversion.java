@@ -10,6 +10,21 @@ import java.util.*;
 public class HTMLConversion {
 
     /*
+        Propt the user for the output txt file path.
+    
+        Input:
+        Output:
+        Printwriter to be used in the program to output the result
+    */
+    public static PrintWriter getprintWriter() throws FileNotFoundException {
+        System.out.println("Enter output file path and name");
+        Scanner outputScanner = new Scanner(System.in);
+        File outputFile = new File(outputScanner.nextLine());
+        PrintWriter writer = new PrintWriter(outputFile);
+        
+        return writer;
+    }
+    /*
         Prompt the user for the input HTML file path.
         Read the file into a single string.
 
@@ -18,7 +33,7 @@ public class HTMLConversion {
         String - HTML content
     */
    public static String readFile() throws FileNotFoundException {
-       System.out.println("Enter input HTML path");
+       System.out.println("Enter input HTML path and name");
        Scanner pathScanner = new Scanner(System.in);
        File file = new File(pathScanner.nextLine());
        String s = "";
@@ -158,8 +173,7 @@ public class HTMLConversion {
         Create output file, PrintWriter, invokes readFile and nextTag. Closes outputWriter.
    */
     public static void main(String[] args) throws FileNotFoundException {
-        File outputFile = new File("Output.txt");
-        PrintWriter outputWriter = new PrintWriter(outputFile);
+        PrintWriter outputWriter = getprintWriter();
         
         String fileString = readFile();
         nextTag(fileString, outputWriter);
